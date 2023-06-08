@@ -13,5 +13,7 @@ def insertionSort(List,n):
                 List[j]=key
     return List
 
-print(insertionSort(a,numer))
+a = insertionSort(a,numer)
+for j in range(0,numer):
+    print(a[j])
 
