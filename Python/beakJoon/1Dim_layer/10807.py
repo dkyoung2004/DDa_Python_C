@@ -4,10 +4,10 @@ N = int(input())
 Count = 0
 
 a = []
-a.extend(input().split())
-a = list(map(int,a))
+a.extend(input().split( ))
+a_int= list(map(int,a))
+V = int(input())
 for i in range(0,N):
-    if a[i] == V:
+    if a_int[i] == V:
         Count += 1
-print(a)
 print(Count)
