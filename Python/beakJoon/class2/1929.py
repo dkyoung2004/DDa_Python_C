@@ -5,8 +5,8 @@ def Prime(n):
     if n == 1:
         False
     else:
-        for i in range(2,int(math.sqrt(N))+1):
-            if k%i==0:
+        for i in range(2,int(math.sqrt(n))+1):
+            if n%i==0:
                 return False
         return True
         
