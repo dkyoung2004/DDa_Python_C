@@ -1,14 +1,10 @@
-a = []
+from collections import deque
+
+
 N =  int(input())
-spare = 0
-spare2 = 0
-for i in range(0,N):
-    a.append(i+1)
+a = deque([i for i in range(1,N+1)])
 for i in range(0,N-1):
-    del a[0]
-    spare = a[0]
-    spare2 = a[(int(len(a))-1)]
-    a[0] = spare2
-    a[(int(len(a))-1)] =spare
-    print(a)
-print(a)
+    a.popleft()
+    spare = a.popleft()
+    a.append(spare)
+print(a[0])
