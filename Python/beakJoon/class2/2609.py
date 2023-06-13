@@ -7,3 +7,4 @@ for i in range(1,N+1):
             maxnum = num
 
 print(maxnum)
+print(int((N*K)/maxnum))
