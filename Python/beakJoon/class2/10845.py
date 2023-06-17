@@ -17,9 +17,9 @@ for i in range(int(input())):
         print(len(arr))
     elif(order[0] == "empty"):
         if((len(arr))!=0):
-            print(1)
-        else:
             print(0)
+        else:
+            print(1)
     elif(order[0] == "front"):
         if((len(arr))!=0):
             print(arr[0])
