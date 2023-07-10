@@ -21,4 +21,3 @@ if(len(Count)!=0):
     print(Count[0])
 else:
     print(-1)
-    
