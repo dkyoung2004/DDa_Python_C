@@ -6,5 +6,4 @@ for i in range(2,X+1):
         loop[i] = min(loop[i], loop[i//2]+1)
     elif i%3==0:
         loop[i] = min(loop[i],loop[i//3]+1)
-    print(loop)
 print(loop[X])
