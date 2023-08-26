@@ -31,7 +31,7 @@ for i in range(t):
         graph[x][y] = 1
     for a in range(n):
         for b in range(m):
-            if graph[a][b] ==1:
+            if graph[a][b] == 1:
                 bfs(graph,a,b)
                 cnt +=1
     print(cnt)
