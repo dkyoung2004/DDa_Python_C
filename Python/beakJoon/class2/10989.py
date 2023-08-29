@@ -3,7 +3,7 @@ a = []
 for i in range(0,numer):
     a.extend(input())
 
-def insertionSort(List,n):
+def insertionSort(List,n ):
     a= 0
     for i in range(1,n):
         key = List[i]
