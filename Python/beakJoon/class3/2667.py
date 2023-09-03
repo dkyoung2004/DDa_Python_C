@@ -20,11 +20,4 @@ def DFS(graph,a,b):
             ny = ay+dy[i]
             if nx < 0 or nx >= N or ny < 0 or ny >= M:
                 continue
-            if graph[nx][ny] == 0:
-                continue
-            if graph[nx][ny] ==1:
-                graph[nx][ny] = (graph[ax][ay]+1)
-                queue.append((nx,ny))
-    return graph[N-1][M-1]
-
 print(DFS(world,0,0))
