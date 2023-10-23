@@ -1,11 +1,13 @@
-from string import ascii_lowercase
+from math import ceil
 
-S = list(map(str,input()))
+T = int(input())
 
-alpha = list(ascii_lowercase)
 
-for i in alpha:
-    if( i in S):
-        print(S.index(i), end = ' ')
-    else:
-        print(-1, end=' ') 
+for i in range(T):
+    floor , room , guest = map(int,input().split())
+    a = guest % floor
+    b = (guest // floor) +1
+    if a == 0:
+        a = floor
+        b -= 1
+    print(a*100 + b)
