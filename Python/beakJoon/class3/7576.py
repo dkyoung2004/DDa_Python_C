@@ -16,11 +16,13 @@ for i in range(M):
         if(chest[i][j] == 1):
             tomato.append([i,j])
 
-print(tomato)
 def DFS():
     queue = deque(tomato)
+    amount = len(queue)
+    count = 0 
     while queue:
         y,x = queue.popleft()
+        amount -= 1
         dx = [0,0,-1,1]
         dy = [-1,1,0,0]
         for i in range(4):
@@ -30,13 +32,16 @@ def DFS():
                 if(chest[ay][ax] == 0):
                     chest[ay][ax] = 1
                     queue.append([ay,ax])
-        
+        if(amount <= 0):
+            amount = len(queue)
+            count += 1
+    return (count-1)
+
+answer = DFS()
 for i in range(M):
     for j in range(N):
-        if(chest[i][j] == 1):
-            print(-1)
-DFS()
-for i in range(M):
-    print(chest[i],end ="\n")
+        if(chest[i][j] == 0):
+            answer = -1
+print(answer)
     
         
