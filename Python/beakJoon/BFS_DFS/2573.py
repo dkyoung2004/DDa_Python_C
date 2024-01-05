@@ -38,7 +38,7 @@ def BFS():
                 if(glacier[ay][ax] <= 0):
                     ocean_count = 1
                 if(glacier[ay][ax] >= 1):
-                    if(visit[ay][ax])):
+                    if(visit[ay][ax]):
                     else:
                         q.append([ay,ax])
         if(ocean_count == 1):
