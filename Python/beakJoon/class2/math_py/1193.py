@@ -1,3 +1,7 @@
+import sys
+
+input = sys.stdin.readline
+
 X = int(input())
 i=0
 j=0
