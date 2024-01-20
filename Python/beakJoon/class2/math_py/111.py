@@ -1,19 +1,20 @@
-arr = []
-max_num = 0
-max_index = 0
+a = list()
 
+a = [1,2,3,4,5,6,7]
+print(a[3])
 
+# 리스트의 n번째 값을 알고 싶으면 a[n-1]
 
-# 리스트 선언
-for _ in range(10):
-    arr.append(int(input()))
+# a[0] + a[4]
 
-#arr에 입력값을 하나씩 저장
-for value in arr: #arr(리스트)를 0번째 자리부터 마지막까지 가면서, 각 자리에 있는 값을 value에 저장
-    if max_num < value:
-        max_num = value
-        max_index = arr.index(value)
-        
-    
+# a = [1,2,3,[4,5]]
 
+# a[3][0]
 
+b = [6,5,4,3,2,1]
+
+#a의 4번째 값을 0으로 만들고 싶다. 
+
+a[3] = 0
+
+del a[3]
