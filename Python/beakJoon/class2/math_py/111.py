@@ -1,20 +1,10 @@
-a = list()
-
-a = [1,2,3,4,5,6,7]
-print(a[3])
-
-# 리스트의 n번째 값을 알고 싶으면 a[n-1]
-
-# a[0] + a[4]
-
-# a = [1,2,3,[4,5]]
-
-# a[3][0]
-
-b = [6,5,4,3,2,1]
-
-#a의 4번째 값을 0으로 만들고 싶다. 
-
-a[3] = 0
-
-del a[3]
+N = int(input())
+A = list(map(int,input().split()))
+max_1 = 0
+minimum = A[0]
+for i in A:
+    if max_1 < i:
+        max_1 = i
+    elif minimum > i:
+        minimum = i
+print(minimum,max_1)
