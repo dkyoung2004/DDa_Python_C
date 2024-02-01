@@ -1,20 +1,18 @@
-import math
+import sys
 
-def lcm(a,b):
-    return a*b/math.gcd(a,b)
+input = sys.stdin.readline
 
+
+def calc(M,N,x,y):
+    i = x
+    while i <= M * N:
+        if(((i-x)) % M == 0 )and (((i-y)%N==0)):
+            return(i)
+        i += M
+    return (-1)
 Loop = int(input())
 
 for _ in range(Loop):
     M,N,x,y = map(int,input().split())
-    find = False
-    dot = int(lcm(M,N))
-    for i in range(1,dot+1):
-        if ((i % M == x )and (i % N == y)):
-            print(i)
-            find=True
-            break
-    if(find == 0):
-        print(-1)
-
+    print(calc(M,N,x,y))
         
