@@ -39,67 +39,8 @@ M_SPEED = Smallfont.render("SPEED : {}".format(BALL.speed),True,(255,255,255))
 
 def main():
     Game_Start = False
-    while True:
-        SURFACE.fill((0,0,0))
-        for event in pygame.event.get():
-            if event.type == KEYDOWN:
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == KEYDOWN:
-                    if event.key == K_LEFT:
-                        PADDLE.rect.centerx -= 10
-                    elif event.key == K_RIGHT:
-                        PADDLE.rect.centerx += 10
-                    elif event.key == K_SPACE:
-                        Game_Start = True
-        if Game_Start == False:
-            SURFACE.blit(M_Game_Start1,(250,500))
-            SURFACE.blit(M_Game_Start2,(180,380))
-        else:
-            for y,color in enumerate(colors,start = 0 ):
-                for x in range(0,9):
-                    BLOCK.append(Block(color,Rect(x*80 + 150 , y*40 + 40,60,20)))
-            Game_start()
-
-
-
-
-        pygame.display.update()
-        FPSCLOCK.tick(60)
-def Game_start():
-        SURFACE.blit(M_SCORE,(250,500))
-        SURFACE.blit(M_SPEED,(550,500))
-        Score = 0
-        LenBlock = len(BLOCK)
-        BLOCK = [x for x in BLOCK if not x.rect.colliderect(BALL.rect)]
-        if len(BLOCK) != LenBlock:
-            Score += 10
-            BALL.dir *= -1
-        if BALL.rect.centery < 1000:
-            BALL.move()
-        
-        if PADDLE.rect.colliderect(BALL.rect):
-            BALL.speed += 0.25
-            BALL.dir = 90 + (PADDLE.rect.centerx - BALL.rect.centerx) / PADDLE.rect.width * 100
-        
-        if PADDLE.rect.centerx < 55:
-            PADDLE.rect.centerx = 55
-        if PADDLE.rect.centerx >945:
-            PADDLE.rect.centerx = 945
-        
-        if BALL.rect.centerx < 0 or BALL.rect.centerx > 1000:
-            BALL.dir = 180 - BALL.dir
-        if BALL.rect.centery < 0 :
-            BALL.dir *= -1
-        if len(BLOCK) == 0:
-            SURFACE.blit(M_CLEAR,(380,400))
-        if BALL.rect.centery > 770 and len(BLOCK) > 0:
-            SURFACE.blit(M_FAIL,(380,400))
-        BALL.draw_E()
-        PADDLE.draw_R()
-        for i in BLOCK:
-            i.draw_R()
-            
-if __name__ == '__main__':
-    main()
+    Score = 0
+    BLOCK = []
+    PADDLE = Block((200,200,0),Rect(375,700,100,30))
+    BALL = Block((200,200,0),Rect(375,650,20,20),10)
+    colors = [(255,0,0),(255,150,0),(255,228,0),(11,201,4),(0,84,255)]
