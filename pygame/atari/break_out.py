@@ -3,8 +3,6 @@ import sys
 import random
 import math
 from pygame.locals import QUIT,KEYDOWN,K_LEFT,K_RIGHT,K_SPACE,Rect
-
-
 class Block:
     def __init__(self, col,rect,speed = 0):
         self.col = col
@@ -13,39 +11,35 @@ class Block:
         self.dir = random.randint(-45,45) +270
     def move(self) : 
         self.rect.centerx += math.cos(math.radians(self.dir)) * self.speed
-        self.rect.centery -= math.sin(math.radians(self.dir))
+        self.rect.centery -= math.sin(math.radians(self.dir)) * self.speed
     def draw_E(self) : 
         pygame.draw.ellipse(SURFACE , self.col , self.rect)
     def draw_R(self) :
         pygame.draw.rect(SURFACE , self.col, self.rect)
 
 pygame.init()
-pygame.display.set_caption('Block_breacker')
+pygame.display.set_caption('Block_breaker')
 pygame.key.set_repeat(10,10)
 SURFACE = pygame.display.set_mode((1000,800))
 FPSCLOCK = pygame.time.Clock()
+Bigfont = pygame.font.SysFont(None,80)
+Smallfont = pygame.font.SysFont(None, 50)
+M_Game_Start1 = Bigfont.render("DO YOU WANT GAME?",True,(255,255,255))
+M_Game_Start2 = Bigfont.render("CLICK THE SPACE_BAR",True,(255,255,255))
+BLOCK = []
+Score = 0
+PADDLE = Block((200,200,0),Rect(375,700,100,30))
+BALL = Block((200,200,0),Rect(375,650,20,20),10)
+colors = [(255,0,0),(255,150,0),(255,228,0),(11,201,4),(0,84,255)]
+M_CLEAR = Bigfont.render("CLEAR!!",True,(255,255,255))
+M_FAIL = Bigfont.render("FAILED", True , (255,255,255))
+M_SCORE = Smallfont.render("SCORE : {}".format(Score) , True , (255,255,255))
+M_SPEED = Smallfont.render("SPEED : {}".format(BALL.speed),True,(255,255,255))
+
 
 def main():
     Game_Start = False
-    Score = 0
-    BLOCK = []
-    PADDLE = Block((200,200,0),Rect(375,700,100,30))
-    BALL = Block((200,200,0),Rect(375,650,20,20),10)
-    colors = [(255,0,0),(255,150,0),(255,228,0),(11,201,4),(0,84,255)]
-    for y,color in enumerate(colors,start = 0 ):
-        for x in range(0,9):
-            BLOCK.append(Block(color,Rect(x*80 + 150 , y*40 + 40,60,20)))
-        
-    Bigfont = pygame.font.SysFont(None,80)
-    Smallfont = pygame.font.SysFont(None, 50)
-    M_Game_Start1 = Bigfont.render("DO YOU WANT GAME?",True,(255,255,255))
-    M_Game_Start2 = Bigfont.render("CLICK THE SPACE_BAR",True,(255,255,255))
-    M_CLEAR = Bigfont.render("CLEAR!!",True,(255,255,255))
-    M_FAIL = Bigfont.render("FAILED", True , (255,255,255))
-
     while True:
-        M_SCORE = Smallfont.render("SCORE : {}".format(Score) , True , (255,255,255))
-        M_SPEED = Smallfont.render("SPEED : {}".format(BALL.speed),True,(255,255,255))
         SURFACE.fill((0,0,0))
         for event in pygame.event.get():
             if event.type == KEYDOWN:
@@ -63,40 +57,49 @@ def main():
             SURFACE.blit(M_Game_Start1,(250,500))
             SURFACE.blit(M_Game_Start2,(180,380))
         else:
-            SURFACE.blit(M_SCORE,(250,500))
-            SURFACE.blit(M_SPEED,(550,500))
-        
-            LenBlock = len(BLOCK)
-            BLOCK = [x for x in BLOCK if not x.rect.colliderect(BALL.rect)]
-            if len(BLOCK) != LenBlock:
-                Score += 10
-                BALL.dir *= -1
-            if BALL.rect.centery < 1000:
-                BALL.move()
-        
-            if PADDLE.rect.colliderect(BALL.rect):
-                BALL.speed += 0.25
-                BALL.dir = 90 + (PADDLE.rect.centerx - BALL.rect.centerx) / PADDLE.rect.width * 100
-        
-            if PADDLE.rect.centerx < 55:
-                PADDLE.rect.centerx = 55
-            if PADDLE.rect.centerx >945:
-                PADDLE.rect.centerx = 945
-        
-            if BALL.rect.centerx < 0 or BALL.rect.centerx > 1000:
-                BALL.dir = 180 - BALL.dir
-        
-            if len(BLOCK) == 0:
-                SURFACE.blit(M_CLEAR,(380,400))
-            if BALL.rect.centery > 770 and len(BLOCK) > 0:
-                SURFACE.blit(M_FAIL,(380,400))
-            BALL.draw_E()
-            PADDLE.draw_R()
-            for i in BLOCK:
-                i.draw_R()
+            for y,color in enumerate(colors,start = 0 ):
+                for x in range(0,9):
+                    BLOCK.append(Block(color,Rect(x*80 + 150 , y*40 + 40,60,20)))
+            Game_start()
+
+
+
 
         pygame.display.update()
         FPSCLOCK.tick(60)
-
+def Game_start():
+        SURFACE.blit(M_SCORE,(250,500))
+        SURFACE.blit(M_SPEED,(550,500))
+        Score = 0
+        LenBlock = len(BLOCK)
+        BLOCK = [x for x in BLOCK if not x.rect.colliderect(BALL.rect)]
+        if len(BLOCK) != LenBlock:
+            Score += 10
+            BALL.dir *= -1
+        if BALL.rect.centery < 1000:
+            BALL.move()
+        
+        if PADDLE.rect.colliderect(BALL.rect):
+            BALL.speed += 0.25
+            BALL.dir = 90 + (PADDLE.rect.centerx - BALL.rect.centerx) / PADDLE.rect.width * 100
+        
+        if PADDLE.rect.centerx < 55:
+            PADDLE.rect.centerx = 55
+        if PADDLE.rect.centerx >945:
+            PADDLE.rect.centerx = 945
+        
+        if BALL.rect.centerx < 0 or BALL.rect.centerx > 1000:
+            BALL.dir = 180 - BALL.dir
+        if BALL.rect.centery < 0 :
+            BALL.dir *= -1
+        if len(BLOCK) == 0:
+            SURFACE.blit(M_CLEAR,(380,400))
+        if BALL.rect.centery > 770 and len(BLOCK) > 0:
+            SURFACE.blit(M_FAIL,(380,400))
+        BALL.draw_E()
+        PADDLE.draw_R()
+        for i in BLOCK:
+            i.draw_R()
+            
 if __name__ == '__main__':
     main()
