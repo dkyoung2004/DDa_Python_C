@@ -23,7 +23,7 @@ pygame.init()
 pygame.display.set_caption('Block_Breaker!!')
 pygame.key.set_repeat(10,10)
 SURFACE = pygame.display.set_mode((1000,800))
-FPSCLOCK = pygame.time.Clock()
+FPSCLOCK = pygame.time.ClWock()
 
 def main():
     Game_Start = False
