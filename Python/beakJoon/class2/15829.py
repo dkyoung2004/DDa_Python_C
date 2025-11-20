@@ -10,4 +10,5 @@ for i in range(length):
     value.append(key[hash[i]])
 for i in range(length):
     result += value[i]* (31** i)
+result = result % 1234567891
 print(result)
